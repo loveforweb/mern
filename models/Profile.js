@@ -76,7 +76,7 @@ const ProfileSchema = new Schema({
       },
       fieldofstudy: {
         type: String,
-        required: red
+        required: true
       },
       from: {
         type: Date,
