@@ -256,21 +256,14 @@ router.delete(
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
     Profile.findOne({ user: req.user.id })
-      .then(profile => {
-        // Get remove index
-        const removeIndex = profile.experience
-          .map(item => item.id)
-          .indexOf(req.params.exp_id);
-
-        console.log(removeIndex);
-
-        // Splice out of array
-        profile.experience.splice(removeIndex, 1);
-
-        // Save
-        profile.save().then(profile => res.json(profile));
+      .then(result => {
+        result.experience.remove({ _id: req.params.exp_id });
+        result
+          .save()
+          .then(result => res.json(result.experience))
+          .catch(err => res.json(err));
       })
-      .catch(err => res.status(404).json(err));
+      .catch(err => res.json(err));
   }
 );
 
@@ -282,21 +275,29 @@ router.delete(
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
     Profile.findOne({ user: req.user.id })
-      .then(profile => {
-        // Get remove index
-        const removeIndex = profile.education
-          .map(item => item.id)
-          .indexOf(req.params.edu_id);
-
-        console.log(removeIndex);
-
-        // Splice out of array
-        profile.education.splice(removeIndex, 1);
-
-        // Save
-        profile.save().then(profile => res.json(profile));
+      .then(result => {
+        result.education.remove({ _id: req.params.edu_id });
+        result
+          .save()
+          .then(result => res.json(result.education))
+          .catch(err => res.json(err));
       })
-      .catch(err => res.status(404).json(err));
+      .catch(err => res.json(err));
+  }
+);
+
+// @route DELETE api/profile/
+// @desc delete user and profile
+// @access Private
+router.delete(
+  '/',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    Profile.findOneAndRemove({ user: req.user.id }).then(() => {
+      User.findOneAndRemove({ _id: req.user.id }).then(() => {
+        res.json({ success: true });
+      });
+    });
   }
 );
 
