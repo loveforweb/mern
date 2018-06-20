@@ -7,8 +7,8 @@
     "client-install": "npm install --prefix client",
     "start": "node server.js",
     "server": "nodemon server.js",
- "client": "yarn --cwd client start",
- "dev": "concurrently 'yarn server' 'yarn client' "
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "author": "Jag",
   "license": "MIT",
