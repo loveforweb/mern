@@ -40,7 +40,6 @@ router.get('/:id', (req, res) => {
 // @route POST api/post
 // @desc Create post
 // @access Private
-
 router.post(
   '/',
   passport.authenticate('jwt', { session: false }),
@@ -67,7 +66,6 @@ router.post(
 // @route DELETE api/post/:id
 // @desc Delete post with id
 // @access Private
-
 router.delete(
   '/:id',
   passport.authenticate('jwt', { session: false }),
@@ -85,6 +83,68 @@ router.delete(
             res.status(404).json({ postNotFound: 'Post not found' })
           );
       });
+    });
+  }
+);
+
+// @route POST api/like/:post_id
+// @desc Like a post
+// @access Private
+router.post(
+  '/like/:id',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    Profile.findOne({ user: req.user.id })
+      .then(profile => {
+        Post.findById(req.params.id).then(post => {
+          if (
+            post.likes.filter(like => like.user.toString() === req.user.id)
+              .length > 0
+          ) {
+            return res
+              .status(400)
+              .json({ alreadyLiked: 'user already liked this post' });
+          }
+
+          // Add user id to likes array
+          post.likes.unshift({ user: req.user.id });
+
+          post.save().then(post => res.json(post));
+        });
+      })
+      .catch(err => res.status(404).json({ postNotFound: 'Post not found' }));
+  }
+);
+
+// @route POST api/unlike/:post_id
+// @desc Like a post
+// @access Private
+router.post(
+  '/unlike/:id',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    Profile.findOne({ user: req.user.id }).then(profile => {
+      Post.findById(req.params.id)
+        .then(post => {
+          if (
+            post.likes.filter(like => like.user.toString() === req.user.id)
+              .length === 0
+          ) {
+            return res
+              .status(400)
+              .json({ notliked: 'You have not yet liked this post' });
+          }
+
+          // Remove
+          const removeIndex = post.likes
+            .map(item => item.user.toString())
+            .indexOf(req.user.id);
+
+          post.likes.splice(removeIndex, 1);
+
+          post.save().then(post => res.json(post));
+        })
+        .catch(err => res.status(404).json({ postNotFound: 'Post not found' }));
     });
   }
 );
