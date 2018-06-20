@@ -200,13 +200,26 @@ router.delete(
             .json({ commentNotFound: 'Comment do not exist' });
         }
 
-        // Remove
-        const removeIndex = post.comments
-          .map(item => item._id.toString())
-          .indexOf(req.params.comment_id);
+        // Filter the comment to be deleted
+        const updatedComments = post.comments.filter(
+          comment =>
+            !(
+              comment.user.toString() === req.user.id &&
+              comment._id.toString() === req.params.comment_id
+            )
+        );
 
-        post.comments.splice(removeIndex, 1);
-
+        // Check to see if the user is authorized to delete that comment
+        // They will only be able to delete that comment if they're the creator of it
+        if (updatedComments.length === post.comments.length) {
+          return res.status(401).json({
+            notauthorized:
+              "If you're seeing this that means either of three things \n 1. You used postman or some other tool to send this request to delete someone else's comment \n 2. You changed the JavaScript on the front-end to send this request \n 3. You made your own script to make the requst."
+          });
+        }
+        // Update comments
+        post.comments = updatedComments;
+        // Save to database
         post.save().then(post => res.json(post));
       })
       .catch(err => res.status(404).json({ postNotFound: 'No post found' }));
