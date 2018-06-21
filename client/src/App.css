@@ -2,6 +2,11 @@ img {
   width: 100%;
 }
 
+img.user-avatar {
+  height: 30px;
+  width: auto;
+}
+
 .landing {
   position: relative;
   background: url('./img/showcase.jpg') no-repeat; 
