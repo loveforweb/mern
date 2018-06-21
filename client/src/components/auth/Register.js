@@ -6,8 +6,8 @@ import { connect } from 'react-redux';
 import { registerUser } from '../../actions/authActions';
 
 class Register extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       name: '',
       email: '',
