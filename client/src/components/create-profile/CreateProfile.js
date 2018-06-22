@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import TextFieldGroup from '../common/TextFieldGroup';
 import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
 import InputGroup from '../common/InputGroup';
 import SelectListGroup from '../common/SelectListGroup';
+import { createProfile } from '../../actions/profileActions';
 
 class CreateProfile extends Component {
   constructor(props) {
@@ -30,8 +32,34 @@ class CreateProfile extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({
+        errors: nextProps.errors
+      });
+    }
+  }
+
   handleSubmit(e) {
     e.preventDefault();
+
+    const profileData = {
+      bio: this.state.bio,
+      company: this.state.company,
+      facebook: this.state.facebook,
+      githubusername: this.state.githubusername,
+      handle: this.state.handle,
+      instagram: this.instagram,
+      linkedin: this.state.linkedin,
+      location: this.state.location,
+      skills: this.state.skills,
+      status: this.state.status,
+      twitter: this.state.twitter,
+      website: this.state.website,
+      youtube: this.state.youtube
+    };
+
+    this.props.createProfile(profileData, this.props.history);
   }
 
   handleChange(e) {
@@ -71,7 +99,7 @@ class CreateProfile extends Component {
             icon="fab fa-linkedin"
             name="linkedin"
             placeholder="LinkedIn Profile URL"
-            value={this.state.linkedIn}
+            value={this.state.linkedin}
           />
 
           <InputGroup
@@ -180,7 +208,7 @@ class CreateProfile extends Component {
                   handleChange={this.handleChange}
                   info="Please use commas separated values (eg. HTML, CSS, JS)"
                   name="skills"
-                  placeholder="Skills"
+                  placeholder="* Skills"
                   value={this.state.skills}
                 />
 
@@ -204,6 +232,7 @@ class CreateProfile extends Component {
 
                 <div className="mb-3">
                   <button
+                    type="button"
                     onClick={() => {
                       this.setState(prevState => ({
                         displaySocialInputs: !prevState.displaySocialInputs
@@ -241,4 +270,7 @@ const mapStateToProps = state => ({
   errors: state.errors
 });
 
-export default connect(mapStateToProps)(CreateProfile);
+export default connect(
+  mapStateToProps,
+  { createProfile }
+)(withRouter(CreateProfile));
