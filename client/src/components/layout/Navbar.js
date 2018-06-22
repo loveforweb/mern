@@ -28,7 +28,8 @@ class Navbar extends Component {
               src={user.avatar}
               alt={user.name}
               title="You must have a Gravatar connected to your email to display the image"
-            />
+            />{' '}
+            Logout
           </a>
         </li>
       </ul>
