@@ -20,7 +20,7 @@ const db = require('./config/keys').mongoURI;
 mongoose
   .connect(db)
   .then(() => console.log('db connected'))
-  .catch(err => onsole.log(err));
+  .catch(err => console.log(err));
 
 // Passport middleware
 app.use(passport.initialize());
