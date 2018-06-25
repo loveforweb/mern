@@ -5,6 +5,7 @@ import { getCurrentProfile, deleteAccount } from '../../actions/profileActions';
 import { Link } from 'react-router-dom';
 import Spinner from '../common/Spinner';
 import ProfileActions from './ProfileActions';
+import Experience from './Experience';
 
 class Dashboard extends Component {
   componentDidMount() {
@@ -33,7 +34,7 @@ class Dashboard extends Component {
             </p>
             <ProfileActions />
 
-            {/* TODO:  EXP AND EDU*/}
+            <Experience experience={profile.experience} />
 
             <div style={{ marginBottom: '60px' }} />
 
