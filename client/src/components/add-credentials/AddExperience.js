@@ -38,7 +38,7 @@ class AddExperience extends Component {
     e.preventDefault();
 
     const expData = {
-      comapny: this.state.company,
+      company: this.state.company,
       title: this.state.title,
       location: this.state.location,
       from: this.state.from,
