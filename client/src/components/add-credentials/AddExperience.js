@@ -23,7 +23,7 @@ class AddExperience extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.onCheck = this.onCheck.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -83,7 +83,7 @@ class AddExperience extends Component {
               <form onSubmit={this.handleSubmit}>
                 <TextFieldGroup
                   error={errors.company}
-                  handleChange={this.handleChange}
+                  onChange={this.handleChange}
                   name="company"
                   placeholder="* Company"
                   value={this.state.company}
@@ -91,7 +91,7 @@ class AddExperience extends Component {
 
                 <TextFieldGroup
                   error={errors.title}
-                  handleChange={this.handleChange}
+                  onChange={this.handleChange}
                   name="title"
                   placeholder="* Job title"
                   value={this.state.title}
@@ -99,7 +99,7 @@ class AddExperience extends Component {
 
                 <TextFieldGroup
                   error={errors.location}
-                  handleChange={this.handleChange}
+                  onChange={this.handleChange}
                   name="location"
                   placeholder="* Location"
                   value={this.state.location}
@@ -108,17 +108,17 @@ class AddExperience extends Component {
                 <h6>From Date</h6>
                 <TextFieldGroup
                   error={errors.from}
-                  handleChange={this.handleChange}
+                  onChange={this.handleChange}
                   name="from"
                   type="date"
-                  value={this.state.date}
+                  value={this.state.from}
                 />
 
                 <h6>To Date</h6>
                 <TextFieldGroup
                   disabled={this.state.disabled ? 'disabled' : ''}
                   error={errors.to}
-                  handleChange={this.handleChange}
+                  onChange={this.handleChange}
                   name="to"
                   type="date"
                   value={this.state.to}
@@ -130,8 +130,8 @@ class AddExperience extends Component {
                     className="form-check-input"
                     name="current"
                     value={this.state.current}
-                    checkeck={this.state.current}
-                    handleChange={this.onCheck}
+                    checked={this.state.current}
+                    onChange={this.onCheck}
                     id="current"
                   />
                   <label htmlFor="current" className="form-check-label">
@@ -141,9 +141,9 @@ class AddExperience extends Component {
 
                 <TextAreaFieldGroup
                   error={errors.description}
-                  handleChange={this.handleChange}
+                  onChange={this.handleChange}
                   info="Tell us about your position"
-                  name="descrtiption"
+                  name="description"
                   placeholder="Job Description"
                   value={this.state.description}
                 />

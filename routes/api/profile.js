@@ -260,7 +260,7 @@ router.delete(
         result.experience.remove({ _id: req.params.exp_id });
         result
           .save()
-          .then(result => res.json(result.experience))
+          .then(result => res.json(result))
           .catch(err => res.json(err));
       })
       .catch(err => res.json(err));
@@ -279,7 +279,7 @@ router.delete(
         result.education.remove({ _id: req.params.edu_id });
         result
           .save()
-          .then(result => res.json(result.education))
+          .then(result => res.json(result))
           .catch(err => res.json(err));
       })
       .catch(err => res.json(err));

@@ -23,7 +23,7 @@ class AddEducation extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.onCheck = this.onCheck.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -83,7 +83,7 @@ class AddEducation extends Component {
               <form onSubmit={this.handleSubmit}>
                 <TextFieldGroup
                   error={errors.school}
-                  handleChange={this.handleChange}
+                  onChange={this.handleChange}
                   name="school"
                   placeholder="* School"
                   value={this.state.school}
@@ -91,7 +91,7 @@ class AddEducation extends Component {
 
                 <TextFieldGroup
                   error={errors.degree}
-                  handleChange={this.handleChange}
+                  onChange={this.handleChange}
                   name="degree"
                   placeholder="* Degree"
                   value={this.state.degree}
@@ -99,7 +99,7 @@ class AddEducation extends Component {
 
                 <TextFieldGroup
                   error={errors.fieldofstudy}
-                  handleChange={this.handleChange}
+                  onChange={this.handleChange}
                   name="fieldofstudy"
                   placeholder="* Field of study"
                   value={this.state.fieldofstudy}
@@ -108,17 +108,17 @@ class AddEducation extends Component {
                 <h6>From Date</h6>
                 <TextFieldGroup
                   error={errors.from}
-                  handleChange={this.handleChange}
+                  onChange={this.handleChange}
                   name="from"
                   type="date"
-                  value={this.state.date}
+                  value={this.state.from}
                 />
 
                 <h6>To Date</h6>
                 <TextFieldGroup
                   disabled={this.state.disabled ? 'disabled' : ''}
                   error={errors.to}
-                  handleChange={this.handleChange}
+                  onChange={this.handleChange}
                   name="to"
                   type="date"
                   value={this.state.to}
@@ -130,8 +130,8 @@ class AddEducation extends Component {
                     className="form-check-input"
                     name="current"
                     value={this.state.current}
-                    checkeck={this.state.current}
-                    handleChange={this.onCheck}
+                    checked={this.state.current}
+                    onChange={this.onCheck}
                     id="current"
                   />
                   <label htmlFor="current" className="form-check-label">
@@ -141,9 +141,9 @@ class AddEducation extends Component {
 
                 <TextAreaFieldGroup
                   error={errors.description}
-                  handleChange={this.handleChange}
+                  onChange={this.handleChange}
                   info="Tell us about the program that you were in"
-                  name="descrtiption"
+                  name="description"
                   placeholder="Program Description"
                   value={this.state.description}
                 />

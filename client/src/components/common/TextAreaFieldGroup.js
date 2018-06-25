@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 const TextAreaFieldGroup = ({
   error,
-  handleChange,
+  onChange,
   info,
   name,
   placeholder,
@@ -17,7 +17,7 @@ const TextAreaFieldGroup = ({
           'is-invalid': error
         })}
         name={name}
-        onChange={handleChange}
+        onChange={onChange}
         placeholder={placeholder}
         value={value}
       />
@@ -29,7 +29,7 @@ const TextAreaFieldGroup = ({
 
 TextAreaFieldGroup.propTypes = {
   error: PropTypes.string,
-  handleChange: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
   info: PropTypes.string,
   name: PropTypes.string.isRequired,
   placeholder: PropTypes.string,

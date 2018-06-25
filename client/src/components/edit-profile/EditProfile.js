@@ -128,7 +128,7 @@ class CreateProfile extends Component {
         <div>
           <InputGroup
             error={errors.twitter}
-            handleChange={this.handleChange}
+            onChange={this.handleChange}
             icon="fab fa-twitter"
             name="twitter"
             placeholder="Twitter Profile URL"
@@ -137,7 +137,7 @@ class CreateProfile extends Component {
 
           <InputGroup
             error={errors.facebook}
-            handleChange={this.handleChange}
+            onChange={this.handleChange}
             icon="fab fa-facebook"
             name="facebook"
             placeholder="Facebook Profile URL"
@@ -146,7 +146,7 @@ class CreateProfile extends Component {
 
           <InputGroup
             error={errors.linkedIn}
-            handleChange={this.handleChange}
+            onChange={this.handleChange}
             icon="fab fa-linkedin"
             name="linkedin"
             placeholder="LinkedIn Profile URL"
@@ -155,7 +155,7 @@ class CreateProfile extends Component {
 
           <InputGroup
             error={errors.youtube}
-            handleChange={this.handleChange}
+            onChange={this.handleChange}
             icon="fab fa-youtube"
             name="youtube"
             placeholder="YouTube Profile URL"
@@ -164,7 +164,7 @@ class CreateProfile extends Component {
 
           <InputGroup
             error={errors.instagram}
-            handleChange={this.handleChange}
+            onChange={this.handleChange}
             icon="fab fa-instagram"
             name="instagram"
             placeholder="Instagram Profile URL"
@@ -212,7 +212,7 @@ class CreateProfile extends Component {
               <form onSubmit={this.handleSubmit}>
                 <TextFieldGroup
                   error={errors.handle}
-                  handleChange={this.handleChange}
+                  onChange={this.handleChange}
                   info="A unique handle ofor your URL. Your full name, company name, nickname etc"
                   name="handle"
                   placeholder="* Profile Handle"
@@ -221,7 +221,7 @@ class CreateProfile extends Component {
 
                 <SelectListGroup
                   error={errors.status}
-                  handleChange={this.handleChange}
+                  onChange={this.handleChange}
                   info="Give us details on what you do"
                   name="status"
                   options={options}
@@ -231,7 +231,7 @@ class CreateProfile extends Component {
 
                 <TextFieldGroup
                   error={errors.company}
-                  handleChange={this.handleChange}
+                  onChange={this.handleChange}
                   info="COuld be your own company or one you work for"
                   name="company"
                   placeholder="Company"
@@ -240,7 +240,7 @@ class CreateProfile extends Component {
 
                 <TextFieldGroup
                   error={errors.website}
-                  handleChange={this.handleChange}
+                  onChange={this.handleChange}
                   info="Could be your own website or a company one"
                   name="website"
                   placeholder="Website"
@@ -249,7 +249,7 @@ class CreateProfile extends Component {
 
                 <TextFieldGroup
                   error={errors.location}
-                  handleChange={this.handleChange}
+                  onChange={this.handleChange}
                   info="City or city &amp; state suggested"
                   name="location"
                   placeholder="Location"
@@ -258,7 +258,7 @@ class CreateProfile extends Component {
 
                 <TextFieldGroup
                   error={errors.skills}
-                  handleChange={this.handleChange}
+                  onChange={this.handleChange}
                   info="Please use commas separated values (eg. HTML, CSS, JS)"
                   name="skills"
                   placeholder="* Skills"
@@ -267,7 +267,7 @@ class CreateProfile extends Component {
 
                 <TextFieldGroup
                   error={errors.githubusername}
-                  handleChange={this.handleChange}
+                  onChange={this.handleChange}
                   info="If you want your latest repos and Github link, include your username"
                   name="githubusername"
                   placeholder="Github Username"
@@ -276,7 +276,7 @@ class CreateProfile extends Component {
 
                 <TextAreaFieldGroup
                   error={errors.bio}
-                  handleChange={this.handleChange}
+                  onChange={this.handleChange}
                   info="Tell us about yourself"
                   name="bio"
                   placeholder="Your Bio"

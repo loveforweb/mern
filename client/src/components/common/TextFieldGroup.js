@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 const TextFieldGroup = ({
   disabled,
   error,
-  handleChange,
+  onChange,
   info,
   label,
   name,
@@ -21,7 +21,7 @@ const TextFieldGroup = ({
         })}
         disabled={disabled}
         name={name}
-        onChange={handleChange}
+        onChange={onChange}
         placeholder={placeholder}
         type={type}
         value={value}
@@ -35,7 +35,7 @@ const TextFieldGroup = ({
 TextFieldGroup.propTypes = {
   disabled: PropTypes.string,
   error: PropTypes.string,
-  handleChange: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
   info: PropTypes.string,
   name: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
