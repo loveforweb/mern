@@ -40,7 +40,7 @@ export const createProfile = (profileData, history) => dispatch => {
     );
 };
 
-// Delete account
+// Delete account and profile
 export const deleteAccount = () => dispatch => {
   if (window.confirm('Are you sure? This CANNOT be undone!')) {
     axios
@@ -51,12 +51,12 @@ export const deleteAccount = () => dispatch => {
           payload: {}
         })
       )
-      .catch(err => {
+      .catch(err =>
         dispatch({
           type: GET_ERRORS,
           payload: err.response.data
-        });
-      });
+        })
+      );
   }
 };
 
