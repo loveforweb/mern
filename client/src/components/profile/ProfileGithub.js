@@ -22,7 +22,7 @@ class ProfileGithub extends Component {
     fetch(
       `https://api.github.com/users/${username}/repos?per_page=${count}&sort=${sort}&client_id=${clientID}&client_secret=${clientSecret}`
     )
-      .then((res = res.json()))
+      .then(res => res.json())
       .then(data => {
         if (this.refs.myRefs) {
           this.setState({ repos: data });
