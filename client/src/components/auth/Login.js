@@ -70,7 +70,7 @@ class Login extends Component {
                   name="email"
                   type="email"
                   value={this.state.email}
-                  handleChange={this.handleChange}
+                  onChange={this.handleChange}
                   error={errors.email}
                 />
 
@@ -79,7 +79,7 @@ class Login extends Component {
                   name="password"
                   type="password"
                   value={this.state.password}
-                  handleChange={this.handleChange}
+                  onChange={this.handleChange}
                   error={errors.password}
                 />
 

@@ -72,20 +72,24 @@ class CreateProfile extends Component {
       profile.youtube = !isEmpty(profile.social.youtube)
         ? profile.social.youtube
         : '';
+      profile.instagram = !isEmpty(profile.social.instagram)
+        ? profile.social.instagram
+        : '';
 
       // Set state to prefill form fields
       this.setState({
-        handle: profile.handle,
-        company: profile.company,
-        website: profile.website,
-        location: profile.location,
-        status: profile.status,
-        skills: skillsCSV,
-        githubusername: profile.githubusername,
         bio: profile.bio,
-        twitter: profile.twitter,
+        company: profile.company,
         facebook: profile.facebook,
+        githubusername: profile.githubusername,
+        handle: profile.handle,
+        instagram: profile.instagram,
         linkedin: profile.linkedin,
+        location: profile.location,
+        skills: skillsCSV,
+        status: profile.status,
+        twitter: profile.twitter,
+        website: profile.website,
         youtube: profile.youtube
       });
     }
@@ -100,7 +104,7 @@ class CreateProfile extends Component {
       facebook: this.state.facebook,
       githubusername: this.state.githubusername,
       handle: this.state.handle,
-      instagram: this.instagram,
+      instagram: this.state.instagram,
       linkedin: this.state.linkedin,
       location: this.state.location,
       skills: this.state.skills,
