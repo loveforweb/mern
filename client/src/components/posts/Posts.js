@@ -20,6 +20,7 @@ class Posts extends Component {
     } else {
       postContent = <PostFeed posts={posts} />;
     }
+
     return (
       <div className="feed">
         <div className="container">
@@ -35,7 +36,7 @@ class Posts extends Component {
   }
 }
 
-PostForm.propTypes = {
+Posts.propTypes = {
   getPosts: PropTypes.func.isRequired,
   post: PropTypes.object.isRequired
 };

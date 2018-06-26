@@ -156,22 +156,17 @@ router.post(
 
     Profile.findOne({ user: req.user.id }).then(profile => {
       if (profile) {
-        // Update
-        // Profile.findOneAndUpdate(
-        //   { user: req.user.id },
-        //   { $set: profileFields },
-        //   { new: true }
-        // ).then(profile => res.json(profile));
-
         Profile.findOne({ handle: profileFields.handle }).then(exists => {
           if (exists) {
             errors.handle = 'That handle already exists';
             return res.status(400).json(errors);
           }
 
-          Profile.update({ $set: profileFields }, { new: true }).then(profile =>
-            res.json(profile)
-          );
+          Profile.update(
+            { user: req.user.id },
+            { $set: profileFields },
+            { new: true }
+          ).then(profile => res.json(profile));
         });
       } else {
         // Create

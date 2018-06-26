@@ -11,11 +11,11 @@ class Profiles extends Component {
   }
 
   render() {
-    const { profiles, loading } = this.props.profiles;
+    const { profiles, loading } = this.props.profile;
 
     let profileItems;
 
-    if ((profiles === null) | loading) {
+    if (profiles === null || loading) {
       profileItems = <Spinner />;
     } else {
       if (profiles.length > 0) {
@@ -27,7 +27,7 @@ class Profiles extends Component {
       }
     }
     return (
-      <div class="profiles">
+      <div className="profiles">
         <div className="container">
           <div className="row">
             <div className="col-md-12">

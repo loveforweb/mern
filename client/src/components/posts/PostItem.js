@@ -37,6 +37,10 @@ class PostItem extends Component {
       'text-secondary': !this.findUserLike(post.likes)
     });
 
+    const isDisabled = classnames({
+      disabled: this.findUserLike(post.likes)
+    });
+
     return (
       <div className="card card-body mb-3">
         <div className="row">
@@ -59,14 +63,16 @@ class PostItem extends Component {
                   type="button"
                   className="btn btn-light mr-1"
                   onClick={this.handleLike.bind(this, post._id)}
+                  disabled={isDisabled}
                 >
                   <i className={thumbIconClass} />
-                  <span className="badge badge-light">{post.like.length}</span>
+                  <span className="badge badge-light">{post.likes.length}</span>
                 </button>
                 <button
                   type="button"
                   className="btn btn-light mr-1"
                   onClick={this.handleRemovelike.bind(this, post._id)}
+                  disabled={!isDisabled}
                 >
                   <i className="text-secondary fas fa-thumbs-down" />
                 </button>
