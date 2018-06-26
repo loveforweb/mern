@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Moment from 'react-moment';
-import { CLIENT_RENEG_LIMIT } from 'tls';
 
 class ProfileCreds extends Component {
   render() {
