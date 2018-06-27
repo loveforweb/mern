@@ -11,6 +11,9 @@
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false yarn install -- prefix client && yarn run build -- prefix cleint"
   },
+  "engines": {
+    "node": "9.7.1"
+  },
   "author": "Jag",
   "license": "MIT",
   "dependencies": {
