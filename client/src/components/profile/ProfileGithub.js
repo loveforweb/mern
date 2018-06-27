@@ -5,10 +5,9 @@ import PropTypes from 'prop-types';
 class ProfileGithub extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
-      clientID: '7bb98b8d07678d42ad1a',
-      clientSecret: '0585d2e7575a44ce49b384681d9f55bbee17fd4e',
+      clientId: '26c196bacea7db10cf48',
+      clientSecret: '0885cb690e07d2a93a6afb0891fb552fd9f7aa53',
       count: 5,
       sort: 'created: asc',
       repos: []
@@ -17,24 +16,25 @@ class ProfileGithub extends Component {
 
   componentDidMount() {
     const { username } = this.props;
-    const { count, sort, clientID, clientSecret } = this.state;
+    const { count, sort, clientId, clientSecret } = this.state;
 
     fetch(
-      `https://api.github.com/users/${username}/repos?per_page=${count}&sort=${sort}&client_id=${clientID}&client_secret=${clientSecret}`
+      `https://api.github.com/users/${username}/repos?per_page=${count}&sort=${sort}&client_id=${clientId}&client_secret=${clientSecret}`
     )
       .then(res => res.json())
       .then(data => {
-        if (this.refs.myRefs) {
+        if (this.refs.myRef) {
           this.setState({ repos: data });
         }
       })
       .catch(err => console.log(err));
   }
+
   render() {
     const { repos } = this.state;
 
     const repoItems = repos.map(repo => (
-      <div key={repos.id} className="card card-body mb-2">
+      <div key={repo.id} className="card card-body mb-2">
         <div className="row">
           <div className="col-md-6">
             <h4>
@@ -58,7 +58,6 @@ class ProfileGithub extends Component {
         </div>
       </div>
     ));
-
     return (
       <div ref="myRef">
         <hr />
@@ -69,7 +68,7 @@ class ProfileGithub extends Component {
   }
 }
 
-ProfileGithub.proTypes = {
+ProfileGithub.propTypes = {
   username: PropTypes.string.isRequired
 };
 

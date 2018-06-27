@@ -6,7 +6,7 @@ class ProfileHeader extends Component {
     const { profile } = this.props;
 
     return (
-      <div class="row">
+      <div className="row">
         <div className="col-md-12">
           <div className="card card-body bg-info text-white mb-3">
             <div className="row">
@@ -21,13 +21,12 @@ class ProfileHeader extends Component {
             <div className="text-center">
               <h1 className="display-4 text-center">{profile.user.name}</h1>
               <p className="lead text-center">
-                {profile.status}
+                {profile.status}{' '}
                 {isEmpty(profile.company) ? null : (
-                  <span> at {profile.company}</span>
+                  <span>at {profile.company}</span>
                 )}
               </p>
               {isEmpty(profile.location) ? null : <p>{profile.location}</p>}
-
               <p>
                 {isEmpty(profile.website) ? null : (
                   <a
@@ -69,16 +68,6 @@ class ProfileHeader extends Component {
                   </a>
                 )}
 
-                {isEmpty(profile.social && profile.social.instagram) ? null : (
-                  <a
-                    className="text-white p-2"
-                    href={profile.social.instagram}
-                    target="_blank"
-                  >
-                    <i className="fab fa-instagram fa-2x" />
-                  </a>
-                )}
-
                 {isEmpty(profile.social && profile.social.youtube) ? null : (
                   <a
                     className="text-white p-2"
@@ -86,6 +75,16 @@ class ProfileHeader extends Component {
                     target="_blank"
                   >
                     <i className="fab fa-youtube fa-2x" />
+                  </a>
+                )}
+
+                {isEmpty(profile.social && profile.social.instagram) ? null : (
+                  <a
+                    className="text-white p-2"
+                    href={profile.social.instagram}
+                    target="_blank"
+                  >
+                    <i className="fab fa-instagram fa-2x" />
                   </a>
                 )}
               </p>

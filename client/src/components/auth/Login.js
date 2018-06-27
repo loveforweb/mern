@@ -13,8 +13,8 @@ class Login extends Component {
       errors: {}
     };
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -29,19 +29,11 @@ class Login extends Component {
     }
 
     if (nextProps.errors) {
-      this.setState({
-        errors: nextProps.errors
-      });
+      this.setState({ errors: nextProps.errors });
     }
   }
 
-  handleChange(e) {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
-  }
-
-  handleSubmit(e) {
+  onSubmit(e) {
     e.preventDefault();
 
     const userData = {
@@ -50,6 +42,10 @@ class Login extends Component {
     };
 
     this.props.loginUser(userData);
+  }
+
+  onChange(e) {
+    this.setState({ [e.target.name]: e.target.value });
   }
 
   render() {
@@ -64,13 +60,13 @@ class Login extends Component {
               <p className="lead text-center">
                 Sign in to your DevConnector account
               </p>
-              <form onSubmit={this.handleSubmit}>
+              <form onSubmit={this.onSubmit}>
                 <TextFieldGroup
                   placeholder="Email Address"
                   name="email"
                   type="email"
                   value={this.state.email}
-                  onChange={this.handleChange}
+                  onChange={this.onChange}
                   error={errors.email}
                 />
 
@@ -79,10 +75,9 @@ class Login extends Component {
                   name="password"
                   type="password"
                   value={this.state.password}
-                  onChange={this.handleChange}
+                  onChange={this.onChange}
                   error={errors.password}
                 />
-
                 <input type="submit" className="btn btn-info btn-block mt-4" />
               </form>
             </div>
@@ -104,7 +99,4 @@ const mapStateToProps = state => ({
   errors: state.errors
 });
 
-export default connect(
-  mapStateToProps,
-  { loginUser }
-)(Login);
+export default connect(mapStateToProps, { loginUser })(Login);

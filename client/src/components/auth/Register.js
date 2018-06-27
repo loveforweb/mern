@@ -16,8 +16,8 @@ class Register extends Component {
       errors: {}
     };
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -28,20 +28,17 @@ class Register extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
-      this.setState({
-        errors: nextProps.errors
-      });
+      this.setState({ errors: nextProps.errors });
     }
   }
 
-  handleChange(e) {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
+  onChange(e) {
+    this.setState({ [e.target.name]: e.target.value });
   }
 
-  handleSubmit(e) {
+  onSubmit(e) {
     e.preventDefault();
+
     const newUser = {
       name: this.state.name,
       email: this.state.email,
@@ -64,44 +61,39 @@ class Register extends Component {
               <p className="lead text-center">
                 Create your DevConnector account
               </p>
-              <form onSubmit={this.handleSubmit} noValidate>
+              <form noValidate onSubmit={this.onSubmit}>
                 <TextFieldGroup
                   placeholder="Name"
                   name="name"
                   value={this.state.name}
-                  onChange={this.handleChange}
+                  onChange={this.onChange}
                   error={errors.name}
                 />
-
                 <TextFieldGroup
-                  placeholder="Email Address"
+                  placeholder="Email"
                   name="email"
                   type="email"
                   value={this.state.email}
-                  onChange={this.handleChange}
+                  onChange={this.onChange}
                   error={errors.email}
-                  info="This site uses Gravatar so if you want a profile image, use
-                  a Gravatar email"
+                  info="This site uses Gravatar so if you want a profile image, use a Gravatar email"
                 />
-
                 <TextFieldGroup
                   placeholder="Password"
                   name="password"
                   type="password"
                   value={this.state.password}
-                  onChange={this.handleChange}
+                  onChange={this.onChange}
                   error={errors.password}
                 />
-
                 <TextFieldGroup
                   placeholder="Confirm Password"
                   name="password2"
                   type="password"
                   value={this.state.password2}
-                  onChange={this.handleChange}
+                  onChange={this.onChange}
                   error={errors.password2}
                 />
-
                 <input type="submit" className="btn btn-info btn-block mt-4" />
               </form>
             </div>
@@ -123,7 +115,4 @@ const mapStateToProps = state => ({
   errors: state.errors
 });
 
-export default connect(
-  mapStateToProps,
-  { registerUser }
-)(withRouter(Register));
+export default connect(mapStateToProps, { registerUser })(withRouter(Register));

@@ -26,7 +26,7 @@ class Profile extends Component {
     const { profile, loading } = this.props.profile;
     let profileContent;
 
-    if (profile == null || loading) {
+    if (profile === null || loading) {
       profileContent = <Spinner />;
     } else {
       profileContent = (
@@ -34,7 +34,7 @@ class Profile extends Component {
           <div className="row">
             <div className="col-md-6">
               <Link to="/profiles" className="btn btn-light mb-3 float-left">
-                Back to profiles
+                Back To Profiles
               </Link>
             </div>
             <div className="col-md-6" />
@@ -65,15 +65,12 @@ class Profile extends Component {
 }
 
 Profile.propTypes = {
-  profile: PropTypes.object.isRequired,
-  getProfileByHandle: PropTypes.func.isRequired
+  getProfileByHandle: PropTypes.func.isRequired,
+  profile: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
   profile: state.profile
 });
 
-export default connect(
-  mapStateToProps,
-  { getProfileByHandle }
-)(Profile);
+export default connect(mapStateToProps, { getProfileByHandle })(Profile);

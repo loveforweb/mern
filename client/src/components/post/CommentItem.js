@@ -4,12 +4,12 @@ import PropTypes from 'prop-types';
 import { deleteComment } from '../../actions/postActions';
 
 class CommentItem extends Component {
-  handleDelete(postId, commentId) {
+  onDeleteClick(postId, commentId) {
     this.props.deleteComment(postId, commentId);
   }
 
   render() {
-    const { comment, auth, postId } = this.props;
+    const { comment, postId, auth } = this.props;
 
     return (
       <div className="card card-body mb-3">
@@ -29,7 +29,7 @@ class CommentItem extends Component {
             <p className="lead">{comment.text}</p>
             {comment.user === auth.user.id ? (
               <button
-                onClick={this.handleDelete.bind(this, postId, comment._id)}
+                onClick={this.onDeleteClick.bind(this, postId, comment._id)}
                 type="button"
                 className="btn btn-danger mr-1"
               >
@@ -44,19 +44,14 @@ class CommentItem extends Component {
 }
 
 CommentItem.propTypes = {
-  auth: PropTypes.object.isRequired,
-  comment: PropTypes.object.isRequired,
   deleteComment: PropTypes.func.isRequired,
-  postId: PropTypes.string.isRequired
+  comment: PropTypes.object.isRequired,
+  postId: PropTypes.string.isRequired,
+  auth: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(
-  mapStateToProps,
-  {
-    deleteComment
-  }
-)(CommentItem);
+export default connect(mapStateToProps, { deleteComment })(CommentItem);

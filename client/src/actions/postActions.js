@@ -1,19 +1,18 @@
 import axios from 'axios';
+
 import {
   ADD_POST,
   GET_ERRORS,
+  CLEAR_ERRORS,
   GET_POSTS,
-  POST_LOADING,
-  DELETE_POST,
-  LIKE_POST,
   GET_POST,
-  CLEAR_ERRORS
+  POST_LOADING,
+  DELETE_POST
 } from './types';
 
 // Add Post
 export const addPost = postData => dispatch => {
   dispatch(clearErrors());
-
   axios
     .post('/api/posts', postData)
     .then(res =>
@@ -33,7 +32,6 @@ export const addPost = postData => dispatch => {
 // Get Posts
 export const getPosts = () => dispatch => {
   dispatch(setPostLoading());
-
   axios
     .get('/api/posts')
     .then(res =>
@@ -53,9 +51,8 @@ export const getPosts = () => dispatch => {
 // Get Post
 export const getPost = id => dispatch => {
   dispatch(setPostLoading());
-
   axios
-    .get(`/api/post/${id}`)
+    .get(`/api/posts/${id}`)
     .then(res =>
       dispatch({
         type: GET_POST,
@@ -88,16 +85,11 @@ export const deletePost = id => dispatch => {
     );
 };
 
-// Add like
+// Add Like
 export const addLike = id => dispatch => {
   axios
     .post(`/api/posts/like/${id}`)
-    .then(({ data }) => {
-      dispatch({
-        type: LIKE_POST,
-        payload: data
-      });
-    })
+    .then(res => dispatch(getPosts()))
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
@@ -106,16 +98,11 @@ export const addLike = id => dispatch => {
     );
 };
 
-// Remove like
+// Remove Like
 export const removeLike = id => dispatch => {
   axios
     .post(`/api/posts/unlike/${id}`)
-    .then(({ data }) => {
-      dispatch({
-        type: LIKE_POST,
-        payload: data //pass in updated post
-      });
-    })
+    .then(res => dispatch(getPosts()))
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
@@ -127,7 +114,6 @@ export const removeLike = id => dispatch => {
 // Add Comment
 export const addComment = (postId, commentData) => dispatch => {
   dispatch(clearErrors());
-
   axios
     .post(`/api/posts/comment/${postId}`, commentData)
     .then(res =>
@@ -169,6 +155,7 @@ export const setPostLoading = () => {
   };
 };
 
+// Clear errors
 export const clearErrors = () => {
   return {
     type: CLEAR_ERRORS

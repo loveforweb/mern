@@ -5,43 +5,36 @@ import Moment from 'react-moment';
 import { deleteEducation } from '../../actions/profileActions';
 
 class Education extends Component {
-  handleDelete(id) {
+  onDeleteClick(id) {
     this.props.deleteEducation(id);
   }
 
   render() {
-    let education;
-
-    if (this.props.education) {
-      education = this.props.education.map(edu => (
-        <tr key={edu._id}>
-          <td>{edu.school}</td>
-          <td>{edu.degree}</td>
-          <td>
-            <Moment format="DD/MM/YYYY">{edu.from}</Moment> -
-            {edu.to === null ? (
-              ' Now'
-            ) : (
-              <Moment format="DD/MM/YYYY"> {edu.to}</Moment>
-            )}
-          </td>
-          <td>
-            <button
-              className="btn btn-danger"
-              onClick={this.handleDelete.bind(this, edu._id)}
-            >
-              Delete
-            </button>
-          </td>
-        </tr>
-      ));
-    } else {
-      education = <p>No education added</p>;
-    }
-
+    const education = this.props.education.map(edu => (
+      <tr key={edu._id}>
+        <td>{edu.school}</td>
+        <td>{edu.degree}</td>
+        <td>
+          <Moment format="YYYY/MM/DD">{edu.from}</Moment> -
+          {edu.to === null ? (
+            ' Now'
+          ) : (
+            <Moment format="YYYY/MM/DD">{edu.to}</Moment>
+          )}
+        </td>
+        <td>
+          <button
+            onClick={this.onDeleteClick.bind(this, edu._id)}
+            className="btn btn-danger"
+          >
+            Delete
+          </button>
+        </td>
+      </tr>
+    ));
     return (
       <div>
-        <h4 className="mb-2">Education Credentials</h4>
+        <h4 className="mb-4">Education Credentials</h4>
         <table className="table">
           <thead>
             <tr>
@@ -50,8 +43,8 @@ class Education extends Component {
               <th>Years</th>
               <th />
             </tr>
+            {education}
           </thead>
-          <tbody>{education}</tbody>
         </table>
       </div>
     );
@@ -62,9 +55,4 @@ Education.propTypes = {
   deleteEducation: PropTypes.func.isRequired
 };
 
-export default connect(
-  null,
-  {
-    deleteEducation
-  }
-)(Education);
+export default connect(null, { deleteEducation })(Education);

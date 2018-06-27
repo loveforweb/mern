@@ -11,30 +11,28 @@ class AddExperience extends Component {
     super(props);
     this.state = {
       company: '',
+      title: '',
+      location: '',
+      from: '',
+      to: '',
       current: false,
       description: '',
-      disabled: false,
       errors: {},
-      from: '',
-      location: '',
-      title: '',
-      to: ''
+      disabled: false
     };
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
     this.onCheck = this.onCheck.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
-      this.setState({
-        errors: nextProps.errors
-      });
+      this.setState({ errors: nextProps.errors });
     }
   }
 
-  handleSubmit(e) {
+  onSubmit(e) {
     e.preventDefault();
 
     const expData = {
@@ -50,10 +48,8 @@ class AddExperience extends Component {
     this.props.addExperience(expData, this.props.history);
   }
 
-  handleChange(e) {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
+  onChange(e) {
+    this.setState({ [e.target.name]: e.target.value });
   }
 
   onCheck(e) {
@@ -72,58 +68,52 @@ class AddExperience extends Component {
           <div className="row">
             <div className="col-md-8 m-auto">
               <Link to="/dashboard" className="btn btn-light">
-                Go back
+                Go Back
               </Link>
               <h1 className="display-4 text-center">Add Experience</h1>
               <p className="lead text-center">
-                Add job or position that you have has in the pass or current
+                Add any job or position that you have had in the past or current
               </p>
               <small className="d-block pb-3">* = required fields</small>
-
-              <form onSubmit={this.handleSubmit}>
+              <form onSubmit={this.onSubmit}>
                 <TextFieldGroup
-                  error={errors.company}
-                  onChange={this.handleChange}
-                  name="company"
                   placeholder="* Company"
+                  name="company"
                   value={this.state.company}
+                  onChange={this.onChange}
+                  error={errors.company}
                 />
-
                 <TextFieldGroup
-                  error={errors.title}
-                  onChange={this.handleChange}
+                  placeholder="* Job Title"
                   name="title"
-                  placeholder="* Job title"
                   value={this.state.title}
+                  onChange={this.onChange}
+                  error={errors.title}
                 />
-
                 <TextFieldGroup
-                  error={errors.location}
-                  onChange={this.handleChange}
+                  placeholder="Location"
                   name="location"
-                  placeholder="* Location"
                   value={this.state.location}
+                  onChange={this.onChange}
+                  error={errors.location}
                 />
-
                 <h6>From Date</h6>
                 <TextFieldGroup
-                  error={errors.from}
-                  onChange={this.handleChange}
                   name="from"
                   type="date"
                   value={this.state.from}
+                  onChange={this.onChange}
+                  error={errors.from}
                 />
-
                 <h6>To Date</h6>
                 <TextFieldGroup
-                  disabled={this.state.disabled ? 'disabled' : ''}
-                  error={errors.to}
-                  onChange={this.handleChange}
                   name="to"
                   type="date"
                   value={this.state.to}
+                  onChange={this.onChange}
+                  error={errors.to}
+                  disabled={this.state.disabled ? 'disabled' : ''}
                 />
-
                 <div className="form-check mb-4">
                   <input
                     type="checkbox"
@@ -138,19 +128,17 @@ class AddExperience extends Component {
                     Current Job
                   </label>
                 </div>
-
                 <TextAreaFieldGroup
-                  error={errors.description}
-                  onChange={this.handleChange}
-                  info="Tell us about your position"
-                  name="description"
                   placeholder="Job Description"
+                  name="description"
                   value={this.state.description}
+                  onChange={this.onChange}
+                  error={errors.description}
+                  info="Tell us about the the position"
                 />
-
                 <input
                   type="submit"
-                  value="submit"
+                  value="Submit"
                   className="btn btn-info btn-block mt-4"
                 />
               </form>
@@ -173,7 +161,6 @@ const mapStateToProps = state => ({
   errors: state.errors
 });
 
-export default connect(
-  mapStateToProps,
-  { addExperience }
-)(withRouter(AddExperience));
+export default connect(mapStateToProps, { addExperience })(
+  withRouter(AddExperience)
+);

@@ -1,18 +1,17 @@
 import axios from 'axios';
+
 import {
-  GET_ERRORS,
   GET_PROFILE,
+  GET_PROFILES,
   PROFILE_LOADING,
   CLEAR_CURRENT_PROFILE,
-  SET_CURRENT_USER,
-  GET_PROFILES,
-  CLEAR_ERRORS
+  GET_ERRORS,
+  SET_CURRENT_USER
 } from './types';
 
 // Get current profile
 export const getCurrentProfile = () => dispatch => {
   dispatch(setProfileLoading());
-
   axios
     .get('/api/profile')
     .then(res =>
@@ -32,7 +31,6 @@ export const getCurrentProfile = () => dispatch => {
 // Get profile by handle
 export const getProfileByHandle = handle => dispatch => {
   dispatch(setProfileLoading());
-
   axios
     .get(`/api/profile/handle/${handle}`)
     .then(res =>
@@ -49,9 +47,8 @@ export const getProfileByHandle = handle => dispatch => {
     );
 };
 
-// Create profile
+// Create Profile
 export const createProfile = (profileData, history) => dispatch => {
-  dispatch(clearErrors());
   axios
     .post('/api/profile', profileData)
     .then(res => history.push('/dashboard'))
@@ -65,7 +62,6 @@ export const createProfile = (profileData, history) => dispatch => {
 
 // Add experience
 export const addExperience = (expData, history) => dispatch => {
-  dispatch(clearErrors());
   axios
     .post('/api/profile/experience', expData)
     .then(res => history.push('/dashboard'))
@@ -77,9 +73,8 @@ export const addExperience = (expData, history) => dispatch => {
     );
 };
 
-// Add experience
+// Add education
 export const addEducation = (eduData, history) => dispatch => {
-  dispatch(clearErrors());
   axios
     .post('/api/profile/education', eduData)
     .then(res => history.push('/dashboard'))
@@ -146,14 +141,14 @@ export const getProfiles = () => dispatch => {
     );
 };
 
-// Delete account and profile
+// Delete account & profile
 export const deleteAccount = () => dispatch => {
-  if (window.confirm('Are you sure? This CANNOT be undone!')) {
+  if (window.confirm('Are you sure? This can NOT be undone!')) {
     axios
       .delete('/api/profile')
       .then(res =>
         dispatch({
-          tyep: SET_CURRENT_USER,
+          type: SET_CURRENT_USER,
           payload: {}
         })
       )
@@ -173,16 +168,9 @@ export const setProfileLoading = () => {
   };
 };
 
-// Clear Profile
+// Clear profile
 export const clearCurrentProfile = () => {
   return {
     type: CLEAR_CURRENT_PROFILE
-  };
-};
-
-// Clear errors
-export const clearErrors = () => {
-  return {
-    type: CLEAR_ERRORS
   };
 };
