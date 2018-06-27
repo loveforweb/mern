@@ -58,7 +58,6 @@ class CommentForm extends Component {
           <div className="card-body">
             <form onSubmit={this.handleSubmit}>
               <div className="form-group">
-                <textarea className="form-control form-control-lg" />
                 <TextAreaFieldGroup
                   placeholder="Reply to post"
                   name="text"

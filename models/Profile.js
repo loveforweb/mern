@@ -57,7 +57,7 @@ const ProfileSchema = new Schema({
       },
       current: {
         type: Boolean,
-        defaulf: false
+        default: false
       },
       description: {
         type: String

@@ -153,7 +153,7 @@ export const deleteAccount = () => dispatch => {
       .delete('/api/profile')
       .then(res =>
         dispatch({
-          tyep: SET_CURRENT_USER,
+          type: SET_CURRENT_USER,
           payload: {}
         })
       )

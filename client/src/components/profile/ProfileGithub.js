@@ -24,7 +24,7 @@ class ProfileGithub extends Component {
     )
       .then(res => res.json())
       .then(data => {
-        if (this.refs.myRefs) {
+        if (this.refs.myRef) {
           this.setState({ repos: data });
         }
       })
@@ -34,7 +34,7 @@ class ProfileGithub extends Component {
     const { repos } = this.state;
 
     const repoItems = repos.map(repo => (
-      <div key={repos.id} className="card card-body mb-2">
+      <div key={repo.id} className="card card-body mb-2">
         <div className="row">
           <div className="col-md-6">
             <h4>

@@ -6,42 +6,35 @@ import { deleteExperience } from '../../actions/profileActions';
 
 class Experience extends Component {
   handleDelete(id) {
-    this.props.deleteExperience(id);
+    this.props.deleteEducation(id);
   }
 
   render() {
-    let experience;
-
-    if (this.props.experience) {
-      experience = this.props.experience.map(exp => (
-        <tr key={exp._id}>
-          <td>{exp.company}</td>
-          <td>{exp.title}</td>
-          <td>
-            <Moment format="DD/MM/YYYY">{exp.from}</Moment> -
-            {exp.to === null ? (
-              ' Now'
-            ) : (
-              <Moment format="DD/MM/YYYY"> {exp.to}</Moment>
-            )}
-          </td>
-          <td>
-            <button
-              className="btn btn-danger"
-              onClick={this.handleDelete.bind(this, exp._id)}
-            >
-              Delete
-            </button>
-          </td>
-        </tr>
-      ));
-    } else {
-      experience = <p>No experience added</p>;
-    }
-
+    const experience = this.props.experience.map(exp => (
+      <tr key={exp._id}>
+        <td>{exp.company}</td>
+        <td>{exp.title}</td>
+        <td>
+          <Moment format="DD/MM/YYYY">{exp.from}</Moment> -
+          {exp.to === null ? (
+            ' Now'
+          ) : (
+            <Moment format="DD/MM/YYYY">{exp.to}</Moment>
+          )}
+        </td>
+        <td>
+          <button
+            className="btn btn-danger"
+            onClick={this.handleDelete.bind(this, exp._id)}
+          >
+            Delete
+          </button>
+        </td>
+      </tr>
+    ));
     return (
       <div>
-        <h4 className="mb-2">Experience Credentials</h4>
+        <h4 className="mb-4">Experience Credentials</h4>
         <table className="table">
           <thead>
             <tr>
@@ -64,7 +57,5 @@ Experience.propTypes = {
 
 export default connect(
   null,
-  {
-    deleteExperience
-  }
+  { deleteExperience }
 )(Experience);
