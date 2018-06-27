@@ -10,28 +10,34 @@ class Education extends Component {
   }
 
   render() {
-    const education = this.props.education.map(edu => (
-      <tr key={edu._id}>
-        <td>{edu.school}</td>
-        <td>{edu.degree}</td>
-        <td>
-          <Moment format="DD/MM/YYYY">{edu.from}</Moment> -
-          {edu.to === null ? (
-            ' Now'
-          ) : (
-            <Moment format="DD/MM/YYYY"> {edu.to}</Moment>
-          )}
-        </td>
-        <td>
-          <button
-            className="btn btn-danger"
-            onClick={this.handleDelete.bind(this, edu._id)}
-          >
-            Delete
-          </button>
-        </td>
-      </tr>
-    ));
+    let education;
+
+    if (this.props.education) {
+      education = this.props.education.map(edu => (
+        <tr key={edu._id}>
+          <td>{edu.school}</td>
+          <td>{edu.degree}</td>
+          <td>
+            <Moment format="DD/MM/YYYY">{edu.from}</Moment> -
+            {edu.to === null ? (
+              ' Now'
+            ) : (
+              <Moment format="DD/MM/YYYY"> {edu.to}</Moment>
+            )}
+          </td>
+          <td>
+            <button
+              className="btn btn-danger"
+              onClick={this.handleDelete.bind(this, edu._id)}
+            >
+              Delete
+            </button>
+          </td>
+        </tr>
+      ));
+    } else {
+      education = <p>No education added</p>;
+    }
 
     return (
       <div>

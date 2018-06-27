@@ -10,28 +10,34 @@ class Experience extends Component {
   }
 
   render() {
-    const experience = this.props.experience.map(exp => (
-      <tr key={exp._id}>
-        <td>{exp.company}</td>
-        <td>{exp.title}</td>
-        <td>
-          <Moment format="DD/MM/YYYY">{exp.from}</Moment> -
-          {exp.to === null ? (
-            ' Now'
-          ) : (
-            <Moment format="DD/MM/YYYY"> {exp.to}</Moment>
-          )}
-        </td>
-        <td>
-          <button
-            className="btn btn-danger"
-            onClick={this.handleDelete.bind(this, exp._id)}
-          >
-            Delete
-          </button>
-        </td>
-      </tr>
-    ));
+    let experience;
+
+    if (this.props.experience) {
+      experience = this.props.experience.map(exp => (
+        <tr key={exp._id}>
+          <td>{exp.company}</td>
+          <td>{exp.title}</td>
+          <td>
+            <Moment format="DD/MM/YYYY">{exp.from}</Moment> -
+            {exp.to === null ? (
+              ' Now'
+            ) : (
+              <Moment format="DD/MM/YYYY"> {exp.to}</Moment>
+            )}
+          </td>
+          <td>
+            <button
+              className="btn btn-danger"
+              onClick={this.handleDelete.bind(this, exp._id)}
+            >
+              Delete
+            </button>
+          </td>
+        </tr>
+      ));
+    } else {
+      experience = <p>No experience added</p>;
+    }
 
     return (
       <div>
